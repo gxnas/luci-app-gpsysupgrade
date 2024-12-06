@@ -6,10 +6,10 @@ local util = require "luci.util"
 local i18n = require "luci.i18n"
 local ipkg = require("luci.model.ipkg")
 local api = require "luci.model.cbi.gpsysupgrade.api"
-local Variable1 = "OpenWrt-GXNAS"
-local Variable2 = "24.10"
-local Variable3 = "x86_64"
-local Variable4 = "6.6"
+local Variable1 = "gxnas"
+local Variable2 = "OpenWrt_Build_x64"
+local Variable3 = "OpenWrt_2305_x64_test"
+local Variable4 = "OpenWrt_2305_x64_test"
 
 function get_system_version()
 	local system_version = luci.sys.exec("[ -f '/etc/openwrt_version' ] && echo -n `cat /etc/openwrt_version` | tr -d '\n'")
@@ -69,9 +69,9 @@ end
 		remoteformat = remote_version
 		if remoteformat > sysverformat and currentTimeStamp > remoteformat then needs_update = true else needs_update = false end
 		if fs.access("/sys/firmware/efi") then
-			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/" ..dateyr.. "-" ..Variable4.. "-openwrt-x86-64-generic-squashfs-combined-efi.img.gz"
+			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/" ..dateyr.. "-" ..Variable4.. "-efi.img.gz"
 		else
-			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/" ..dateyr.. "-" ..Variable4.. "-openwrt-x86-64-generic-squashfs-combined.img.gz"
+			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/" ..dateyr.. "-" ..Variable4.. "-bios.img.gz"
 		end
 	else
 		local needs_update = false
